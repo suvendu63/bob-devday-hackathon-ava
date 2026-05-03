@@ -1,0 +1,172 @@
+/* Wizard Step Container */
+.wizard-step {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.step-title {
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+  color: #161616;
+}
+
+/* Form Layout */
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-field {
+  flex: 1;
+}
+
+.form-field.half-width {
+  flex: 0 0 calc(50% - 0.5rem);
+}
+
+.form-field.full-width {
+  flex: 1 1 100%;
+}
+
+/* Traveler Sections */
+.traveler-section {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.traveler-section:last-of-type {
+  border-bottom: none;
+}
+
+.traveler-title {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+  color: #161616;
+}
+
+/* Button Group */
+.button-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* AI Generation Step */
+.ai-generation-step {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.loading-text {
+  font-size: 1.125rem;
+  color: #525252;
+  margin: 0;
+}
+
+/* Review Step */
+.review-step {
+  max-width: 1200px;
+}
+
+.review-section {
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+  color: #161616;
+}
+
+.save-button-container {
+  margin: 2rem 0;
+}
+
+.request-id-tag {
+  margin-bottom: 1.5rem;
+}
+
+/* Documents Grid */
+.documents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.document-tile {
+  padding: 1rem;
+  cursor: default;
+}
+
+.document-tile-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.document-tile-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.document-tile-icon {
+  color: #0f62fe;
+  flex-shrink: 0;
+}
+
+.document-tile-name {
+  font-size: 0.875rem;
+  color: #161616;
+  word-break: break-word;
+}
+
+/* Accordion Styling */
+.cds--accordion__content {
+  padding: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-field.half-width {
+    flex: 1 1 100%;
+  }
+
+  .documents-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .button-group button {
+    width: 100%;
+  }
+}
+
+/* Made with Bob */
