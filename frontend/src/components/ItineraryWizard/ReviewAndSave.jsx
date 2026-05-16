@@ -25,6 +25,55 @@ const ReviewAndSave = ({ generatedData, onFinish }) => {
     <div className="wizard-step review-step">
       <h2 className="step-title">Itinerary Generation Complete</h2>
 
+      {/* Optimized Flight Options */}
+      {generatedData.flightOptions && generatedData.flightOptions.length > 0 && (
+        <section className="review-section">
+          <h3 className="section-title">
+            {/* <Airplane size={24} style={{ marginRight: '8px', verticalAlign: 'middle' }} /> */}
+            Optimized Flight Options
+          </h3>
+          
+          <div className="flights-grid">
+            {generatedData.flightOptions.map((flight, index) => (
+              <Tile key={index} className="flight-tile">
+                <div className="flight-tile-header">
+                  <h4 className="flight-airline">{flight.airline}</h4>
+                  <Tag type="blue">{flight.flightNumber}</Tag>
+                </div>
+                
+                <div className="flight-tile-details">
+                  <div className="flight-detail-row">
+                    <span className="flight-detail-label">Price:</span>
+                    <span className="flight-detail-value flight-price">${flight.price}</span>
+                  </div>
+                  <div className="flight-detail-row">
+                    <span className="flight-detail-label">Duration:</span>
+                    <span className="flight-detail-value">{flight.duration}</span>
+                  </div>
+                  <div className="flight-detail-row">
+                    <span className="flight-detail-label">Layovers:</span>
+                    <span className="flight-detail-value">{flight.layovers}</span>
+                  </div>
+                </div>
+                
+                <div className="flight-tile-actions">
+                  <Button
+                    kind="primary"
+                    size="sm"
+                    as="a"
+                    href={flight.bookingUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Book Now
+                  </Button>
+                </div>
+              </Tile>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Personalized Travel Plans */}
       <section className="review-section">
         <h3 className="section-title">Personalized Travel Plans</h3>

@@ -82,7 +82,8 @@ const AIGenerationStep = ({ formData, onComplete, onError }) => {
             id: index + 1,
             label: interest.text
           })),
-          specialRequests: formData.specialRequests
+          specialRequests: formData.specialRequests,
+          flightPreferences: formData.flightPreferences
         };
 
         console.log('Sending request:', JSON.stringify(requestData, null, 2));
