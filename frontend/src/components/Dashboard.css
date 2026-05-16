@@ -165,10 +165,27 @@
 /* Carbon Design System Overrides */
 .cds--data-table-container {
   padding-top: 0;
+  background-color: #ffffff !important;
+}
+
+.cds--data-table {
+  background-color: #ffffff !important;
+}
+
+.cds--data-table thead {
+  background-color: #e0e0e0 !important;
+}
+
+.cds--data-table tbody {
+  background-color: #ffffff !important;
+}
+
+.cds--data-table tr {
+  background-color: #ffffff !important;
 }
 
 .cds--table-toolbar {
-  background-color: #ffffff;
+  background-color: #ffffff !important;
 }
 
 .cds--overflow-menu {

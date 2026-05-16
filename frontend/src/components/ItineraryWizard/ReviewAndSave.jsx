@@ -1,6 +1,6 @@
-import React from 'react';
 import { Button, Accordion, AccordionItem, Tag, Tile } from '@carbon/react';
 import { Document, Download } from '@carbon/icons-react';
+import ReactMarkdown from 'react-markdown';
 import './Steps.css';
 
 const ReviewAndSave = ({ generatedData, onFinish }) => {
@@ -36,8 +36,8 @@ const ReviewAndSave = ({ generatedData, onFinish }) => {
                 key={travelerName}
                 title={`Itinerary for ${travelerName}`}
               >
-                <div style={{ whiteSpace: 'pre-wrap', fontFamily: 'monospace', fontSize: '0.875rem' }}>
-                  {itinerary}
+                <div className="itinerary-content">
+                  <ReactMarkdown>{itinerary}</ReactMarkdown>
                 </div>
               </AccordionItem>
             ))}
