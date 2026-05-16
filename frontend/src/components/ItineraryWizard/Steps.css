@@ -222,9 +222,22 @@
 /* Flight Options Grid */
 .flights-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
   gap: 1.5rem;
   margin-top: 1.5rem;
+  max-width: 100%;
+}
+
+@media (max-width: 1400px) {
+  .flights-grid {
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  .flights-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
 }
 
 .flight-tile {
@@ -282,6 +295,76 @@
 .flight-price {
   font-size: 1.125rem;
   color: #0f62fe;
+}
+
+.flight-layover-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background-color: #f4f4f4;
+  border-radius: 4px;
+}
+
+.flight-layover-label {
+  font-size: 0.75rem;
+  color: #525252;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.flight-layover-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.flight-layover-tags .cds--tag {
+  max-width: 100%;
+}
+
+.flight-times-section {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.flight-time-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.flight-time-icon {
+  color: #0f62fe;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.flight-time-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.flight-time-label {
+  font-size: 0.75rem;
+  color: #525252;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.flight-time-value {
+  font-size: 0.875rem;
+  color: #161616;
+  font-weight: 600;
 }
 
 .flight-tile-actions {
