@@ -109,8 +109,7 @@ const Step02Travelers = ({ formData, updateFormData, onNext, onBack }) => {
             </div>
           </div>
 
-          {(traveler.sponsorType === 'Company / Employer' || 
-            traveler.sponsorType.startsWith('Sponsored by Traveler')) && (
+          {traveler.sponsorType === 'Company / Employer' && (
             <div className="form-row">
               <div className="form-field full-width">
                 <TextInput
