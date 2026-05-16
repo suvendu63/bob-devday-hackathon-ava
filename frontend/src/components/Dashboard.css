@@ -140,9 +140,11 @@
   padding: 1rem;
 }
 
-.details-modal .cds--btn--primary {
+.details-modal .cds--modal-footer .cds--btn--primary {
   width: 100%;
   max-width: 100%;
+  margin-top: -1rem;
+  margin-right: -1rem;
 }
 
 /* Responsive Design */

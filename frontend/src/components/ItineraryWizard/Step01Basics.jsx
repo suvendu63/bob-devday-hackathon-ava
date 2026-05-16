@@ -1,4 +1,3 @@
-import React from 'react';
 import { Select, SelectItem, DatePicker, DatePickerInput, TextInput, Button } from '@carbon/react';
 import './Steps.css';
 
@@ -15,6 +14,10 @@ const Step01Basics = ({ formData, updateFormData, onNext }) => {
     e.preventDefault();
     onNext();
   };
+
+  // Get today's date to disable past dates in MM/DD/YYYY format
+  const today = new Date();
+  const formattedToday = `${String(today.getMonth() + 1).padStart(2, '0')}/${String(today.getDate()).padStart(2, '0')}/${today.getFullYear()}`;
 
   return (
     <form onSubmit={handleSubmit} className="wizard-step">
@@ -58,6 +61,7 @@ const Step01Basics = ({ formData, updateFormData, onNext }) => {
             datePickerType="single"
             value={formData.startDate}
             onChange={(dates) => updateFormData({ startDate: dates[0] })}
+            minDate={formattedToday}
           >
             <DatePickerInput
               id="startDate"
@@ -73,6 +77,7 @@ const Step01Basics = ({ formData, updateFormData, onNext }) => {
             datePickerType="single"
             value={formData.endDate}
             onChange={(dates) => updateFormData({ endDate: dates[0] })}
+            minDate={formattedToday}
           >
             <DatePickerInput
               id="endDate"
