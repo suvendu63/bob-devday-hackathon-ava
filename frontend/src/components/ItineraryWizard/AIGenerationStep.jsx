@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Loading, InlineNotification } from '@carbon/react';
 import axios from 'axios';
 import './Steps.css';
@@ -7,14 +7,14 @@ const API_BASE_URL = 'http://localhost:3001/api/visa';
 
 const AIGenerationStep = ({ formData, onComplete, onError }) => {
   const [error, setError] = useState(null);
-  const [isGenerating, setIsGenerating] = useState(false);
+  const hasCalledAPI = useRef(false);
 
   useEffect(() => {
-    // Prevent multiple calls
-    if (isGenerating) return;
+    // Prevent multiple calls using useRef (persists across re-renders and StrictMode remounts)
+    if (hasCalledAPI.current) return;
+    hasCalledAPI.current = true;
 
     const generateItinerary = async () => {
-      setIsGenerating(true);
       try {
         // Format dates to MM/DD/YYYY
         const formatDate = (dateString) => {
@@ -102,7 +102,7 @@ const AIGenerationStep = ({ formData, onComplete, onError }) => {
       } catch (err) {
         console.error('Error generating itinerary:', err);
         setError(err.response?.data?.error || 'Failed to generate itinerary. Please try again.');
-        setIsGenerating(false);
+        hasCalledAPI.current = false; // Reset on error to allow retry
       }
     };
 
