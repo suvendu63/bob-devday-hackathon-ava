@@ -36,6 +36,10 @@ const ItineraryWizard = () => {
     // Step 03: The How
     transport: '',
     purpose: '',
+    flightPreferences: {
+      optimization: 'cheapest',
+      maxPrice: ''
+    },
     
     // Step 04: Personalize
     interests: [],
