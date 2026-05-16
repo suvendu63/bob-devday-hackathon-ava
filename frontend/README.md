@@ -1,6 +1,6 @@
-# IBM Travel Itinerary AI - Frontend
+# Agentic VISA Assistant - Frontend
 
-React frontend application built with Vite and Carbon Design System for the IBM Travel Itinerary AI project.
+React frontend application built with Vite and Carbon Design System for the Agentic VISA Assistant project.
 
 ## Features
 
@@ -168,7 +168,7 @@ import Dashboard from './components/Dashboard';
 test('renders dashboard with data', async () => {
   render(<Dashboard />);
   await waitFor(() => {
-    expect(screen.getByText('Travel Packages')).toBeInTheDocument();
+    expect(screen.getByText('Visa Application Package')).toBeInTheDocument();
   });
 });
 ```
@@ -205,4 +205,4 @@ ISC
 
 ## Author
 
-IBM Travel Itinerary AI Team
+Agentic VISA Assistant Team

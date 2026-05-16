@@ -37,8 +37,8 @@ const Layout = ({ children }) => {
   return (
     <div className="layout-container">
       {/* Header */}
-      <Header aria-label="IBM Travel Itinerary AI">
-        <HeaderName prefix="">IBM Travel Itinerary AI</HeaderName>
+      <Header aria-label="Agentic VISA Assistant">
+        <HeaderName prefix="">Agentic VISA Assistant</HeaderName>
       </Header>
 
       {/* Main Content */}
