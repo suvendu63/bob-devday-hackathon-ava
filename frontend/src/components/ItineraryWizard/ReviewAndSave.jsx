@@ -1,5 +1,5 @@
 import { Button, Accordion, AccordionItem, Tag, Tile } from '@carbon/react';
-import { Document, Download } from '@carbon/icons-react';
+import { Document, Download, Plane, Time } from '@carbon/icons-react';
 import ReactMarkdown from 'react-markdown';
 import './Steps.css';
 
@@ -21,6 +21,32 @@ const ReviewAndSave = ({ generatedData, onFinish }) => {
     }
   };
 
+  const formatDateTime = (dateTimeString) => {
+    if (!dateTimeString) return 'N/A';
+    try {
+      // Extract the actual date-time part (after the duplicate date prefix)
+      const parts = dateTimeString.split('T');
+      if (parts.length > 1) {
+        const timePart = parts[1].replace('Z', '');
+        const datePart = timePart.split(' ')[0];
+        const actualTime = timePart.split(' ')[1];
+        
+        const date = new Date(datePart + 'T' + actualTime);
+        return date.toLocaleString('en-US', {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true
+        });
+      }
+      return dateTimeString;
+    } catch (error) {
+      return dateTimeString;
+    }
+  };
+
   return (
     <div className="wizard-step review-step">
       <h2 className="step-title">Itinerary Generation Complete</h2>
@@ -29,7 +55,7 @@ const ReviewAndSave = ({ generatedData, onFinish }) => {
       {generatedData.flightOptions && generatedData.flightOptions.length > 0 && (
         <section className="review-section">
           <h3 className="section-title">
-            {/* <Airplane size={24} style={{ marginRight: '8px', verticalAlign: 'middle' }} /> */}
+            <Plane size={24} style={{ marginRight: '8px', verticalAlign: 'middle' }} />
             Optimized Flight Options
           </h3>
           
@@ -44,15 +70,54 @@ const ReviewAndSave = ({ generatedData, onFinish }) => {
                 <div className="flight-tile-details">
                   <div className="flight-detail-row">
                     <span className="flight-detail-label">Price:</span>
-                    <span className="flight-detail-value flight-price">${flight.price}</span>
+                    <span className="flight-detail-value flight-price">
+                      ${flight.price} {flight.currency || 'USD'}
+                    </span>
                   </div>
+                  
                   <div className="flight-detail-row">
                     <span className="flight-detail-label">Duration:</span>
                     <span className="flight-detail-value">{flight.duration}</span>
                   </div>
+                  
                   <div className="flight-detail-row">
                     <span className="flight-detail-label">Layovers:</span>
                     <span className="flight-detail-value">{flight.layovers}</span>
+                  </div>
+                  
+                  {flight.layoverAirports && flight.layoverAirports.length > 0 && (
+                    <div className="flight-layover-section">
+                      <span className="flight-layover-label">Via:</span>
+                      <div className="flight-layover-tags">
+                        {flight.layoverAirports.map((airport, idx) => (
+                          <Tag key={idx} type="gray" size="sm">
+                            {airport}
+                          </Tag>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  
+                  <div className="flight-times-section">
+                    <div className="flight-time-row">
+                      <Time size={16} className="flight-time-icon" />
+                      <div className="flight-time-details">
+                        <span className="flight-time-label">Departure:</span>
+                        <span className="flight-time-value">
+                          {formatDateTime(flight.departureTime)}
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <div className="flight-time-row">
+                      <Time size={16} className="flight-time-icon" />
+                      <div className="flight-time-details">
+                        <span className="flight-time-label">Arrival:</span>
+                        <span className="flight-time-value">
+                          {formatDateTime(flight.arrivalTime)}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 
