@@ -40,13 +40,19 @@ const Step02Travelers = ({ formData, updateFormData, onNext, onBack }) => {
       { value: 'Company / Employer', text: 'Company / Employer' }
     ];
     
-    // Add other travelers as sponsor options
+    // Add other travelers as sponsor options, but prevent circular dependencies
     formData.travelers.forEach((traveler, index) => {
       if (index !== currentIndex && traveler.name) {
-        options.push({
-          value: `Sponsored by Traveler ${index + 1}`,
-          text: `Sponsored by Traveler ${index + 1}`
-        });
+        // Check if the other traveler is sponsored by the current traveler
+        const otherTravelerSponsoredByCurrent = traveler.sponsorType === `Sponsored by Traveler ${currentIndex + 1}`;
+        
+        // Only add as option if there's no circular dependency
+        if (!otherTravelerSponsoredByCurrent) {
+          options.push({
+            value: `Sponsored by Traveler ${index + 1}`,
+            text: `Sponsored by Traveler ${index + 1}`
+          });
+        }
       }
     });
     
