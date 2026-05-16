@@ -16,6 +16,8 @@ const archiver = require('archiver');
  * @returns {Promise<string>} Path to the generated PDF
  */
 async function generatePDF(content, metadata, outputPath) {
+  console.log('***************************************content', content)
+
   return new Promise((resolve, reject) => {
     try {
       // Create a new PDF document
@@ -46,20 +48,55 @@ async function generatePDF(content, metadata, outputPath) {
       doc.moveDown(2);
       
       // Split content into paragraphs and format
-      const paragraphs = content.split('\n\n');
+      const paragraphs = content.split('\n');
       paragraphs.forEach((paragraph, index) => {
         if (paragraph.trim()) {
-          // Check if it's a heading (all caps or starts with "Day")
-          if (paragraph.trim().toUpperCase() === paragraph.trim() || paragraph.trim().startsWith('Day ')) {
+          const trimmed = paragraph.trim();
+          
+          // Check if it's a day header (e.g., "Day 6 - 2026-05-28")
+          const isDayHeader = /^Day \d+\s*-/.test(trimmed);
+          
+          // Check if it's a section header (short line, all caps, or starts with ##)
+          const isSectionHeader = (trimmed.length < 50 && trimmed.toUpperCase() === trimmed) ||
+                                  trimmed.startsWith('##') ||
+                                  trimmed.startsWith('Travel Itinerary');
+          
+          if (isDayHeader || isSectionHeader) {
+            // Bold for day headers and section headers
             doc.font('Helvetica-Bold')
                .fontSize(12)
-               .text(paragraph.trim(), { align: 'left' });
+               .text(trimmed.replace(/^##\s*/, ''), { align: 'left' });
             doc.moveDown(0.5);
+            // Reset to regular font after header
+            doc.font('Helvetica').fontSize(11);
           } else {
-            doc.font('Helvetica')
-               .fontSize(11)
-               .text(paragraph.trim(), { align: 'justify' });
-            doc.moveDown(1);
+            // Check if line contains time indicators (Morning:, Afternoon:, Evening:)
+            const timeIndicatorMatch = trimmed.match(/^(\*\s*)?(Morning|Afternoon|Evening|Night):\s*(.+)$/);
+            
+            if (timeIndicatorMatch) {
+              // Extract parts: bullet (if any), time indicator, and description
+              const bullet = timeIndicatorMatch[1] || '';
+              const timeIndicator = timeIndicatorMatch[2];
+              const description = timeIndicatorMatch[3];
+              
+              // Write bullet (if present) in regular font
+              if (bullet) {
+                doc.font('Helvetica').fontSize(11).text(bullet, { continued: true });
+              }
+              
+              // Write time indicator in bold
+              doc.font('Helvetica-Bold').fontSize(11).text(`${timeIndicator}: `, { continued: true });
+              
+              // Write description in regular font
+              doc.font('Helvetica').fontSize(11).text(description);
+              doc.moveDown(0.5);
+            } else {
+              // Regular text for all other content
+              doc.font('Helvetica')
+                 .fontSize(11)
+                 .text(trimmed, { align: 'left' });
+              doc.moveDown(0.5);
+            }
           }
         }
       });
