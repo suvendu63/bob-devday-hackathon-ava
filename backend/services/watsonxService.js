@@ -539,7 +539,11 @@ async function generateItinerary(traveler, requestData) {
     const response = await callWatsonxWithTools(prompt);
     
     console.log('Itinerary generated successfully');
-    return response.text;
+    if (response.text.includes("Day 1") && response.text.split("Day 1").length > 1) {
+      return response.text.split("Day 1")[0];
+    } else {
+      return response.text;
+    }
   } catch (error) {
     console.error('Error generating itinerary:', error);
     throw error;
